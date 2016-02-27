@@ -1,3 +1,9 @@
+
+<form action="mongosearch.php" method="get">
+Search Error: <input type="text" name="msearch"><br>
+<input type="submit">
+</form>
+
 <?php
 
     $m=new MongoClient();
@@ -6,7 +12,7 @@
 
     $cursor = $collection->find();
     foreach ($cursor as $doc){
-        var_dump($doc);
+        /*var_dump($doc);*/
     }
 
   echo "<h2> Table printing </h2>";
@@ -27,8 +33,18 @@ foreach($cursor as $document){
   $data .= "<tr>";
   $data .= "<td>" . $document["dbname"]."</td>";
   $data .= "<td>" . $document["error"]."</td>";
+  if(isset($document["Solution"])){
   $data .= "<td>" . $document["Solution"]."</td>";
+   }
+   else{
+  $data .= "<td>" . "Sorry No Solution Available - If you got one, please update this record"."</td>";
+   }
+  if(isset($document["Vendorcase"])){
   $data .= "<td>" . $document["Vendorcase"]."</td>";
+   }
+  else{
+    $data .= "<td>" ."No Vendor Case Raised yet - If Case raised please update this record"."</td>";
+  }
   $data .= "</tr>";
 }
   $data .= "</tbody>";
@@ -36,7 +52,7 @@ foreach($cursor as $document){
   echo $data;
 
   /* Working code */
-echo "<h2> searching and printing in Table format </h2>";
+echo "<h2> Searching and printing in Table format </h2>";
   $data  = "<table style='border:1px solid red;";
   $data .= "border-collapse:collapse' border='1px'>";
   $data .= "<thead>";
