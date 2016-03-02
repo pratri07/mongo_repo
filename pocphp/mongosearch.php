@@ -11,9 +11,19 @@ Search Error: <input type="text" name="msearch"><br>
     $collection = new MongoCollection($db,'errorinfo');
 
     $cursor = $collection->find();
-    foreach ($cursor as $doc){
-        /*var_dump($doc);*/
-    }
+
+/* Cursor to array conversion and search inside the array */
+
+$curtoarry = iterator_to_array($cursor);
+
+foreach ($curtoarry as $doc){
+/*var_dump($doc);*/
+print_r($doc);
+
+}
+
+/* Ends here Cursor to array conversion and search inside the array */
+
 
     /* Working code */
   echo "<h2> Searching and printing in Table format </h2>";
@@ -31,10 +41,10 @@ Search Error: <input type="text" name="msearch"><br>
 
 
     /*$sweetquery1 = array('error' => $_GET["msearch"],'dbname' => $_GET["msearch"],'Solution' => $_GET["msearch"],'Vendorcase' => $_GET["msearch"]);*/
-    $searchfield = array('dbname', 'error','Solution','Vendorcase');
+    $searchfield = array('dbname','error','Solution','Vendorcase');
 
 
-global $sweetquery;
+global $sweetquery; /* Sweetquery is used to build search criteria in MongoDB */
 $sweetquery = array();
 global $sweetquery1;
 $sweetquery1 = array();
@@ -44,13 +54,13 @@ global $final_results;
 $final_results = array();
 
 
-$sweetquery1 = array('error' => $_GET["msearch"]);
-$match_results = $collection->find($sweetquery1);
+/*$sweetquery1 = array('error' => $_GET["msearch"]);
+$match_results = $collection->find($sweetquery1);*/
 
 $searchtext = $_GET["msearch"];
 
 foreach ($searchfield as $searchkey) {
-  $sweetquery = array($searchkey => $searchtext);
+$sweetquery = array($searchkey => $searchtext);
   /*$sweetquery1 = array_merge($sweetquery);
   /*arrya_push($sweetquery, $searchkey => $searchtext);
 
@@ -65,6 +75,17 @@ foreach ($searchfield as $searchkey) {
  var_dump ($match_results);*/
 if (!empty($match_results)){
  $final_result[$searchkey] = iterator_to_array($match_results);
+
+/*## i am writing
+$items = array(); $j=0;
+
+foreach($group_membership as $i => $username)
+ { $items[$j++]=$username; }
+
+
+## finish my write*/
+
+
 }
 
 echo "<br>";
