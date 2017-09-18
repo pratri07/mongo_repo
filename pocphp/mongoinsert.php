@@ -1,6 +1,6 @@
 <?php
 
-    $m=new MongoClient();
+    $m = new MongoClient("mongodb://mongodb", array("username" => user8MT, "password" => TM8NoRUhuIkuaC5T));
     $db=$m->selectDB("mydb");
     $collection = new MongoCollection($db,'errorinfo');
 
