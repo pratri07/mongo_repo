@@ -1,6 +1,6 @@
 <?php
 
-    $m = new MongoClient("mongodb://admin:GMTqnHwxYDEsFHtO@mongodb", array("db" => "admin"));
+    $m = new MongoClient("mongodb://admin:GMTqnHwxYDEsFHtO@mongodb.nodepractice.svc/admin");
     $db=$m->selectDB("admin");
     $collection = new MongoCollection($db,'errorinfo');
 
