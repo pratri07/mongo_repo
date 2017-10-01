@@ -6,7 +6,7 @@ Search Error: <input type="text" name="msearch"><br>
 
 <?php
 
-    $m=new MongoClient();
+    $m=new MongoClient("mongodb://userV7K:0Nbipm07WnLuLFRD@mongodb/sampledb");
     $db=$m->selectDB("mydb");
     $collection = new MongoCollection($db,'errorinfo');
 
